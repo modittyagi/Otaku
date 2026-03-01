@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otakuboxd — Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0F14; --surface: #13161e; --surface2: #1a1d27;
+    --border: rgba(255,255,255,0.06); --purple: #9b5de5; --pink: #f15bb5;
+    --grad: linear-gradient(135deg, #9b5de5, #f15bb5);
+    --text: #f0f0f5; --muted: #6b6e7e; --muted2: #9396a8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 40px; height:56px; background:rgba(13,15,20,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+  .nav-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:18px; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:13px; font-weight:500; transition:color .2s; }
+  .nav-links a:hover,.nav-links a.active { color:var(--text); }
+  .btn-outline { border:1px solid var(--border); background:transparent; color:var(--muted2); font-family:'DM Sans',sans-serif; font-size:13px; padding:7px 18px; border-radius:6px; cursor:pointer; transition:all .2s; }
+  .btn-outline:hover { border-color:var(--purple); color:var(--text); }
+
+  .banner { position:relative; height:380px; margin-top:56px; overflow:hidden; }
+  .banner-scene { width:100%; height:100%; background:radial-gradient(ellipse at 30% 50%,rgba(120,30,180,.35) 0%,transparent 60%),radial-gradient(ellipse at 70% 40%,rgba(200,40,120,.2) 0%,transparent 55%),linear-gradient(135deg,#0a0510 0%,#1a0a2e 15%,#2d0d4a 25%,#1a0535 35%,#0e1a3a 50%,#051030 60%,#150820 75%,#0d0614 100%); position:relative; }
+  .banner-scene::before { content:''; position:absolute; inset:0; background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.7) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 40% 15%,rgba(255,255,255,.9) 0%,transparent 100%),radial-gradient(1px 1px at 70% 25%,rgba(255,255,255,.6) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 85% 55%,rgba(255,255,255,.8) 0%,transparent 100%),radial-gradient(2px 2px at 90% 10%,rgba(200,150,255,.7) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 78% 78%,rgba(255,200,255,.6) 0%,transparent 100%),radial-gradient(1px 1px at 25% 60%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 55% 45%,rgba(255,255,255,.4) 0%,transparent 100%); }
+  .banner-scene::after { content:''; position:absolute; top:40px; right:180px; width:60px; height:60px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#fff9e6,#ffd080); box-shadow:0 0 40px 15px rgba(255,200,80,.2),0 0 80px 30px rgba(255,150,50,.08); }
+  .banner-gradient { position:absolute; inset:0; background:linear-gradient(180deg,transparent 0%,transparent 40%,rgba(13,15,20,.5) 70%,var(--bg) 100%); }
+  .banner-tag { position:absolute; top:24px; left:40px; display:flex; align-items:center; gap:8px; background:rgba(0,0,0,.4); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.1); border-radius:6px; padding:6px 14px; font-size:11px; color:var(--muted2); letter-spacing:.5px; }
+  .banner-tag span { color:var(--text); font-weight:500; }
+
+  .profile-header { position:relative; margin-top:-90px; padding:0 48px 48px; display:flex; align-items:flex-end; gap:32px; }
+  .avatar-wrap { flex-shrink:0; position:relative; }
+  .avatar-ring { width:120px; height:120px; border-radius:50%; padding:3px; background:var(--grad); box-shadow:0 0 30px rgba(155,93,229,.5),0 0 60px rgba(241,91,181,.2); animation:pulse-glow 3s ease-in-out infinite; }
+  @keyframes pulse-glow { 0%,100%{box-shadow:0 0 30px rgba(155,93,229,.5),0 0 60px rgba(241,91,181,.2);}50%{box-shadow:0 0 45px rgba(155,93,229,.7),0 0 90px rgba(241,91,181,.35);} }
+  .avatar-inner { width:100%; height:100%; border-radius:50%; background:linear-gradient(135deg,#1e1035,#2d1a4a,#1a0d35); display:flex; align-items:center; justify-content:center; font-size:40px; overflow:hidden; }
+  .avatar-inner img { width:100%; height:100%; object-fit:cover; transition:opacity .4s; }
+  .online-dot { position:absolute; bottom:6px; right:6px; width:14px; height:14px; border-radius:50%; background:#4ade80; border:2px solid var(--bg); box-shadow:0 0 8px rgba(74,222,128,.6); }
+  .profile-info { flex:1; padding-bottom:8px; }
+  .profile-username { font-family:'Syne',sans-serif; font-weight:800; font-size:36px; letter-spacing:-1px; line-height:1; margin-bottom:8px; }
+  .profile-bio { color:var(--muted2); font-size:14px; line-height:1.6; max-width:480px; margin-bottom:14px; }
+  .profile-tags { display:flex; gap:8px; flex-wrap:wrap; }
+  .tag { background:rgba(155,93,229,.12); border:1px solid rgba(155,93,229,.25); color:#c084fc; font-size:11px; padding:4px 10px; border-radius:20px; font-weight:500; }
+  .profile-actions { display:flex; gap:10px; padding-bottom:8px; align-self:flex-end; }
+  .btn-follow { background:var(--grad); border:none; color:white; font-family:'DM Sans',sans-serif; font-weight:600; font-size:14px; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity .2s,transform .2s; }
+  .btn-follow:hover { opacity:.9; transform:translateY(-1px); }
+  .btn-msg { background:var(--surface2); border:1px solid var(--border); color:var(--muted2); font-family:'DM Sans',sans-serif; font-size:14px; padding:10px 18px; border-radius:8px; cursor:pointer; transition:all .2s; }
+  .btn-msg:hover { border-color:var(--muted); color:var(--text); }
+
+  .section-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(155,93,229,.3),rgba(241,91,181,.2),transparent); margin:0 48px; }
+
+  .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; padding:36px 48px; }
+  .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px 28px; position:relative; overflow:hidden; transition:transform .25s,border-color .25s; cursor:default; }
+  .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--grad); opacity:0; transition:opacity .25s; }
+  .stat-card::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at top left,rgba(155,93,229,.06) 0%,transparent 60%); pointer-events:none; }
+  .stat-card:hover { transform:translateY(-3px); border-color:rgba(155,93,229,.3); }
+  .stat-card:hover::before { opacity:1; }
+  .stat-icon { font-size:18px; margin-bottom:12px; opacity:.8; }
+  .stat-number { font-family:'Syne',sans-serif; font-weight:800; font-size:38px; letter-spacing:-2px; line-height:1; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:6px; }
+  .stat-label { color:var(--muted); font-size:12px; letter-spacing:.8px; text-transform:uppercase; font-weight:500; }
+  .stat-sub { color:var(--muted); font-size:11px; margin-top:6px; }
+
+  .section { padding:0 48px 48px; }
+  .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+  .section-title { font-family:'Syne',sans-serif; font-weight:700; font-size:20px; letter-spacing:-.3px; display:flex; align-items:center; gap:10px; }
+  .section-title::before { content:''; width:3px; height:20px; background:var(--grad); border-radius:2px; }
+  .section-link { color:var(--muted); font-size:13px; text-decoration:none; transition:color .2s; }
+  .section-link:hover { color:var(--purple); }
+
+  .scroll-row { display:flex; gap:16px; overflow-x:auto; padding-bottom:16px; scrollbar-width:thin; scrollbar-color:rgba(155,93,229,.3) transparent; }
+  .scroll-row::-webkit-scrollbar { height:4px; }
+  .scroll-row::-webkit-scrollbar-track { background:transparent; }
+  .scroll-row::-webkit-scrollbar-thumb { background:linear-gradient(90deg,var(--purple),var(--pink)); border-radius:2px; }
+
+  .anime-card { flex-shrink:0; width:140px; cursor:pointer; }
+  .anime-poster { width:140px; height:196px; border-radius:10px; overflow:hidden; position:relative; transition:transform .3s,box-shadow .3s; background:var(--surface2); }
+  .anime-card:hover .anime-poster { transform:translateY(-6px) scale(1.02); box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 20px rgba(155,93,229,.2); }
+  .anime-poster img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; position:relative; z-index:1; }
+  .poster-overlay { position:absolute; inset:0; z-index:2; background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8) 100%); opacity:0; transition:opacity .3s; display:flex; align-items:flex-end; padding:10px; }
+  .anime-card:hover .poster-overlay { opacity:1; }
+  .poster-play { background:var(--grad); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-size:12px; }
+  .watched-badge { position:absolute; top:8px; right:8px; z-index:3; background:rgba(0,0,0,.7); backdrop-filter:blur(6px); border-radius:4px; padding:3px 7px; font-size:10px; color:var(--muted2); font-weight:500; }
+  .anime-title { margin-top:10px; font-size:12px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .anime-year { font-size:11px; color:var(--muted); margin-top:2px; }
+  .star-row { display:flex; gap:2px; margin-top:6px; align-items:center; }
+  .star { font-size:11px; color:var(--muted); }
+  .star.filled { color:#f59e0b; }
+  .star.half { color:#f59e0b; opacity:.6; }
+  .rating-text { font-size:11px; color:var(--muted2); margin-left:4px; font-weight:500; }
+
+  /* Shimmer skeleton */
+  .skeleton { position:absolute; inset:0; background:linear-gradient(110deg,var(--surface2) 30%,rgba(155,93,229,.1) 50%,var(--surface2) 70%); background-size:200% 100%; animation:shimmer 1.6s infinite; z-index:0; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+  .favorites-grid { display:flex; gap:16px; }
+  .fav-card { flex:1; cursor:pointer; }
+  .fav-poster { width:100%; aspect-ratio:2/3; border-radius:10px; overflow:hidden; position:relative; transition:transform .3s,box-shadow .3s; background:var(--surface2); }
+  .fav-card:hover .fav-poster { transform:translateY(-8px); box-shadow:0 25px 50px rgba(0,0,0,.7),0 0 30px rgba(155,93,229,.25); }
+  .fav-poster img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; position:relative; z-index:1; }
+  .fav-overlay { position:absolute; inset:0; z-index:2; background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.9) 100%); opacity:0; transition:opacity .3s; display:flex; flex-direction:column; justify-content:flex-end; padding:14px; }
+  .fav-card:hover .fav-overlay { opacity:1; }
+  .fav-name { font-size:13px; font-weight:600; color:white; line-height:1.3; }
+  .fav-year { font-size:11px; color:rgba(255,255,255,.6); margin-top:2px; }
+  .fav-rank { margin-top:10px; font-size:11px; color:var(--muted); font-weight:500; text-align:center; }
+
+  .progress-section { padding:0 48px 48px; }
+  .genre-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .genre-item { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; transition:border-color .2s; }
+  .genre-item:hover { border-color:rgba(155,93,229,.3); }
+  .genre-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .genre-name { font-size:13px; font-weight:500; }
+  .genre-count { font-size:12px; color:var(--muted); }
+  .progress-bar { height:3px; background:rgba(255,255,255,.06); border-radius:2px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--grad); border-radius:2px; }
+
+  footer { padding:40px 48px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:15px; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .footer-text { font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Otakuboxd</div>
+  <ul class="nav-links">
+    <li><a href="#">Films</a></li><li><a href="#">Series</a></li><li><a href="#">Lists</a></li><li><a href="#">Members</a></li><li><a href="#" class="active">Profile</a></li>
+  </ul>
+  <div><button class="btn-outline">Sign In</button></div>
+</nav>
+
+<div class="banner">
+  <div class="banner-scene"></div>
+  <div class="banner-gradient"></div>
+  <div class="banner-tag">📌 Currently watching: <span>Frieren: Beyond Journey's End</span></div>
+</div>
+
+<div class="profile-header">
+  <div class="avatar-wrap">
+    <div class="avatar-ring">
+      <div class="avatar-inner">
+        <img id="avatar-img" src="" alt="avatar" style="opacity:0;">
+      </div>
+    </div>
+    <div class="online-dot"></div>
+  </div>
+  <div class="profile-info">
+    <h1 class="profile-username">yumeko.s</h1>
+    <p class="profile-bio">Living in the space between reality and anime. Sucker for tragedy, found family, and any OP that makes me cry. I rate with my heart, not my brain.</p>
+    <div class="profile-tags">
+      <span class="tag">Fantasy</span><span class="tag">Slice of Life</span><span class="tag">Psychological</span><span class="tag">Makoto Shinkai fan</span>
+    </div>
+  </div>
+  <div class="profile-actions">
+    <button class="btn-follow">Follow</button>
+    <button class="btn-msg">Message</button>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card"><div class="stat-icon">📺</div><div class="stat-number">347</div><div class="stat-label">Anime Watched</div><div class="stat-sub">+12 this month</div></div>
+  <div class="stat-card"><div class="stat-icon">▶</div><div class="stat-number">8,291</div><div class="stat-label">Episodes Seen</div><div class="stat-sub">Across all series</div></div>
+  <div class="stat-card"><div class="stat-icon">⏱</div><div class="stat-number">2,047</div><div class="stat-label">Hours Spent</div><div class="stat-sub">≈ 85 days of anime</div></div>
+  <div class="stat-card"><div class="stat-icon">✍</div><div class="stat-number">63</div><div class="stat-label">Reviews Written</div><div class="stat-sub">Avg. 4.2 ★ helpfulness</div></div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="section" style="padding-top:40px;">
+  <div class="section-header">
+    <div class="section-title">Recent Activity</div>
+    <a href="#" class="section-link">View all →</a>
+  </div>
+  <div class="scroll-row">
+
+    <div class="anime-card">
+      <div class="anime-poster"><div class="skeleton"></div><img data-mid="52991" src="" alt="Frieren" style="opacity:0;"><div class="poster-overlay"><div class="poster-play">▶</div></div><div class="watched-badge">EP 28</div></div>
+      <div class="anime-title">Frieren</div><div class="anime-year">2023</div>
+      <div class="star-row"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="rating-text">5.0</span></div>
+    </div>
+
+    <div class="anime-card">
+      <div class="anime-poster"><div class="skeleton"></div><img data-mid="32281" src="" alt="Your Name." style="opacity:0;"><div class="poster-overlay"><div class="poster-play">▶</div></div><div class="watched-badge">FILM</div></div>
+      <div class="anime-title">Your Name.</div><div class="anime-year">2016</div>
+      <div class="star-row"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span><span class="rating-text">4.5</span></div>
+    </div>
+
+    <div class="anime-card">
+      <div class="anime-poster"><div class="skeleton"></div><img data-mid="33352" src="" alt="Violet Evergarden" style="opacity:0;"><div class="poster-overlay"><div class="poster-play">▶</div></div><div class="watched-badge">EP 13</div></div>
+      <div class="anime-title">Violet Evergarden</div><div class="anime-year">2018</div>
+      <div class="star-row"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="rating-text">5.0</span></div>
+    </div>
+
+    <div class="anime-card">
+      <div class="anime-poster"><div class="skeleton"></div><img data-mid="38000" src="" alt="Demon Slayer" style="opacity:0;"><div class="poster-overlay"><div class="poster-play">▶</div></div><div class="watched-badge">EP 26</div></div>
+      <div class="anime-title">Demon Slayer</div><div class="anime-year">2019</div>
+      <div class="star-row"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span><span class="rating-text">4.0</span></div>
+    </div>
+
+    <div class="anime-card">
+      <div class="anime-poster"><div class="skeleton"></div><img data-mid="5114" src="" alt="FMA Brotherhood" style="opacity:0;"><div class="poster-overlay"><div class="poster-play">▶</div></div><div class="watched-badge">EP 64</div></div>
+      <div class="anime-title">Fullmetal Alchemist: Brotherhood</div><div class="anime-year">2009</div>
+      <div class="star-row"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="rating-text">5.0</span></div>
+    </div>
+
+    <div class="anime-card">
+      <div class="anime-poster"><div class="skeleton"></div><img data-mid="16498" src="" alt="Attack on Titan" style="opacity:0;"><div class="poster-overlay"><div class="poster-play">▶</div></div><div class="watched-badge">EP 87</div></div>
+      <div class="anime-title">Attack on Titan</div><div class="anime-year">2013</div>
+      <div class="star-row"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span><span class="rating-text">4.5</span></div>
+    </div>
+
+    <div class="anime-card">
+      <div class="anime-poster"><div class="skeleton"></div><img data-mid="40748" src="" alt="Jujutsu Kaisen" style="opacity:0;"><div class="poster-overlay"><div class="poster-play">▶</div></div><div class="watched-badge">EP 47</div></div>
+      <div class="anime-title">Jujutsu Kaisen</div><div class="anime-year">2020</div>
+      <div class="star-row"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span><span class="rating-text">4.0</span></div>
+    </div>
+
+    <div class="anime-card">
+      <div class="anime-poster"><div class="skeleton"></div><img data-mid="457" src="" alt="Mushishi" style="opacity:0;"><div class="poster-overlay"><div class="poster-play">▶</div></div><div class="watched-badge">EP 26</div></div>
+      <div class="anime-title">Mushishi</div><div class="anime-year">2005</div>
+      <div class="star-row"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="rating-text">5.0</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="section" style="padding-top:40px;">
+  <div class="section-header">
+    <div class="section-title">Favorite Anime</div>
+    <a href="#" class="section-link">Edit favorites →</a>
+  </div>
+  <div class="favorites-grid">
+
+    <div class="fav-card">
+      <div class="fav-poster"><div class="skeleton"></div><img data-mid="52991" src="" alt="Frieren" style="opacity:0;"><div class="fav-overlay"><div class="fav-name">Frieren: Beyond Journey's End</div><div class="fav-year">2023</div></div></div>
+      <div class="fav-rank">#1 — All time</div>
+    </div>
+
+    <div class="fav-card">
+      <div class="fav-poster"><div class="skeleton"></div><img data-mid="33352" src="" alt="Violet Evergarden" style="opacity:0;"><div class="fav-overlay"><div class="fav-name">Violet Evergarden</div><div class="fav-year">2018</div></div></div>
+      <div class="fav-rank">#2</div>
+    </div>
+
+    <div class="fav-card">
+      <div class="fav-poster"><div class="skeleton"></div><img data-mid="5114" src="" alt="FMA Brotherhood" style="opacity:0;"><div class="fav-overlay"><div class="fav-name">FMA: Brotherhood</div><div class="fav-year">2009</div></div></div>
+      <div class="fav-rank">#3</div>
+    </div>
+
+    <div class="fav-card">
+      <div class="fav-poster"><div class="skeleton"></div><img data-mid="32281" src="" alt="Your Name." style="opacity:0;"><div class="fav-overlay"><div class="fav-name">Your Name.</div><div class="fav-year">2016</div></div></div>
+      <div class="fav-rank">#4</div>
+    </div>
+
+    <div class="fav-card">
+      <div class="fav-poster"><div class="skeleton"></div><img data-mid="457" src="" alt="Mushishi" style="opacity:0;"><div class="fav-overlay"><div class="fav-name">Mushishi</div><div class="fav-year">2005</div></div></div>
+      <div class="fav-rank">#5</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="progress-section" style="padding-top:40px;">
+  <div class="section-header">
+    <div class="section-title">Genre Breakdown</div>
+    <a href="#" class="section-link">Full stats →</a>
+  </div>
+  <div class="genre-grid">
+    <div class="genre-item"><div class="genre-top"><span class="genre-name">Fantasy</span><span class="genre-count">89 titles</span></div><div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div></div>
+    <div class="genre-item"><div class="genre-top"><span class="genre-name">Slice of Life</span><span class="genre-count">71 titles</span></div><div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div></div>
+    <div class="genre-item"><div class="genre-top"><span class="genre-name">Action / Shonen</span><span class="genre-count">63 titles</span></div><div class="progress-bar"><div class="progress-fill" style="width:58%"></div></div></div>
+    <div class="genre-item"><div class="genre-top"><span class="genre-name">Psychological</span><span class="genre-count">44 titles</span></div><div class="progress-bar"><div class="progress-fill" style="width:41%"></div></div></div>
+    <div class="genre-item"><div class="genre-top"><span class="genre-name">Romance</span><span class="genre-count">38 titles</span></div><div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div></div>
+    <div class="genre-item"><div class="genre-top"><span class="genre-name">Sci-Fi / Mecha</span><span class="genre-count">29 titles</span></div><div class="progress-bar"><div class="progress-fill" style="width:27%"></div></div></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Otakuboxd</div>
+  <div class="footer-text">© 2025 Otakuboxd · Built for the culture</div>
+</footer>
+
+<script>
+// Cache fetched URLs so identical MAL IDs don't re-request
+const cache = {};
+
+async function getImageUrl(malId) {
+  if (cache[malId] !== undefined) return cache[malId];
+  try {
+    const r = await fetch(`https://api.jikan.moe/v4/anime/${malId}`);
+    if (!r.ok) { cache[malId] = null; return null; }
+    const d = await r.json();
+    const url = d?.data?.images?.jpg?.large_image_url
+             || d?.data?.images?.jpg?.image_url
+             || null;
+    cache[malId] = url;
+    return url;
+  } catch(e) {
+    cache[malId] = null;
+    return null;
+  }
+}
+
+function revealImage(img, url) {
+  if (!url) return;
+  img.onload = () => {
+    img.style.opacity = '1';
+    const skel = img.previousElementSibling;
+    if (skel && skel.classList.contains('skeleton')) {
+      skel.style.transition = 'opacity .3s';
+      skel.style.opacity = '0';
+      setTimeout(() => skel.remove(), 300);
+    }
+  };
+  img.src = url;
+}
+
+async function loadPosters() {
+  const imgs = [...document.querySelectorAll('img[data-mid]')];
+  // Deduplicate by MAL ID but keep all img references
+  const seen = {};
+  const queue = [];
+  imgs.forEach(img => {
+    const id = img.dataset.mid;
+    if (!seen[id]) { seen[id] = []; queue.push(id); }
+    seen[id].push(img);
+  });
+
+  for (let i = 0; i < queue.length; i++) {
+    const id = queue[i];
+    const url = await getImageUrl(id);
+    seen[id].forEach(img => revealImage(img, url));
+    if (i < queue.length - 1) await new Promise(r => setTimeout(r, 400));
+  }
+}
+
+// Avatar - Frieren character
+async function loadAvatar() {
+  try {
+    // Small delay so avatar loads after the first anime poster request
+    await new Promise(r => setTimeout(r, 200));
+    const r = await fetch('https://api.jikan.moe/v4/characters/184643');
+    if (!r.ok) throw 0;
+    const d = await r.json();
+    const url = d?.data?.images?.jpg?.image_url;
+    const img = document.getElementById('avatar-img');
+    if (url && img) {
+      img.onload = () => { img.style.opacity = '1'; };
+      img.src = url;
+    }
+  } catch(e) {
+    document.querySelector('.avatar-inner').innerHTML = '<span style="font-size:40px">🌸</span>';
+  }
+}
+
+window.addEventListener('load', () => {
+  loadPosters();
+  // Avatar fetched in parallel but with slight offset to not compete
+  setTimeout(loadAvatar, 200);
+});
+</script>
+</body>
+</html>
